@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>原価ダッシュボード</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+
+  <header>
+    <h1>原価ダッシュボード</h1>
+    <p class="lead">材料の値段を1か所直すと、全メニューの原価・粗利・原価率がその場で計算し直されます。</p>
+  </header>
+
+  <!-- ① 結果 -->
+  <section>
+    <div class="sec-head">
+      <h2>メニュー別の原価と粗利</h2>
+      <label class="target">目標原価率
+        <input type="number" id="target" value="30" min="1" max="99" step="1">%
+      </label>
+    </div>
+
+    <div id="alerts"></div>
+
+    <div class="table-wrap">
+      <table id="summary">
+        <thead>
+          <tr>
+            <th class="l">メニュー</th>
+            <th>売価</th>
+            <th>原価</th>
+            <th>粗利</th>
+            <th>原価率</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+        <tfoot></tfoot>
+      </table>
+    </div>
+  </section>
+
+  <!-- ② 材料 -->
+  <section>
+    <div class="sec-head">
+      <h2>材料の値段</h2>
+      <button id="add-material" class="ghost">＋ 材料を足す</button>
+    </div>
+    <p class="hint">「買った値段 ÷ 買った量」で1単位あたりの単価を出しています。仕入れ値が変わったらここだけ直せば、上の表が全部つられて変わります。</p>
+    <div class="table-wrap">
+      <table id="materials">
+        <thead>
+          <tr>
+            <th class="l">材料・消耗品</th>
+            <th>買った値段</th>
+            <th>買った量</th>
+            <th>単位</th>
+            <th>1単位の単価</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ③ レシピ -->
+  <section>
+    <div class="sec-head">
+      <h2>レシピ（1杯・1個に何を使うか）</h2>
+      <button id="add-menu" class="ghost">＋ メニューを足す</button>
+    </div>
+    <div id="recipes"></div>
+  </section>
+
+  <footer>
+    <button id="reset" class="ghost danger">サンプルの数字に戻す</button>
+    <p class="note">
+      入力した数字は<strong>このブラウザの中だけ</strong>に保存されます。インターネットには送られません。<br>
+      公開版に入っている数字は<strong>すべて架空のサンプル</strong>です。
+    </p>
+  </footer>
+
+</main>
+<script src="app.js"></script>
+</body>
+</html>

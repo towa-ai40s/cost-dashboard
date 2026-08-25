@@ -1,0 +1,8 @@
+# Cloudflareへの指示書。
+
+name = "cost-dashboard"
+compatibility_date = "2026-08-06"
+
+# 公開するファイルが入っているフォルダ。
+# ⚠️ ここを "." にしてはいけない（2026-08-16に翻訳アプリでキーを露出させた）。
+pages_build_output_dir = "public"
