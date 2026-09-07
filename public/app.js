@@ -181,7 +181,8 @@ function renderRecipes() {
             <span class="unit">${(materialById(it.m) || {}).unit || ""}</span>
             <button class="x" data-del-line="${menu.id}" data-i="${i}" title="削除">×</button>
           </div>`).join("")}
-        <button class="ghost sm" data-add-line="${menu.id}">＋ 材料を足す</button>
+        <button class="ghost sm" data-add-line="${menu.id}">＋ ある材料から選ぶ</button>
+        <button class="ghost sm primary" data-new-mat="${menu.id}">＋ 新しい材料を作って足す</button>
       </div>
     `;
     wrap.appendChild(card);
@@ -244,6 +245,18 @@ document.addEventListener("click", (e) => {
     state.materials = state.materials.filter(m => m.id !== b.dataset.delMat);
   } else if (b.dataset.delMenu) {
     state.menus = state.menus.filter(m => m.id !== b.dataset.delMenu);
+  } else if (b.dataset.newMat) {
+    // 新しい材料を作り、そのままこのメニューの材料としても足す。
+    // 「材料の表まで行って作る → レシピに戻って選び直す」の往復をなくすため。
+    const id = "x" + Date.now();
+    state.materials.push({ id, name: "", price: 0, qty: 1, unit: "g" });
+    const menu = state.menus.find(m => m.id === b.dataset.newMat);
+    menu.items.push({ m: id, q: 1 });
+    save(); renderAll();
+    // 作った材料の名前欄にカーソルを飛ばす（すぐ打ち始められるように）
+    const box = document.querySelector(`#materials input[data-id="${id}"][data-f="name"]`);
+    if (box) { box.focus(); box.scrollIntoView({ block: "center", behavior: "smooth" }); }
+    return;
   } else if (b.dataset.addLine) {
     const menu = state.menus.find(m => m.id === b.dataset.addLine);
     menu.items.push({ m: state.materials[0]?.id, q: 1 });

@@ -117,3 +117,8 @@ footer { text-align: center; margin-top: 28px; }
 @media (max-width: 560px) {
   .recipe-head .t { flex: 1 1 100%; }
 }
+
+/* 2026-09-08 追加: レシピから材料をその場で作るボタン。
+   材料の表とレシピを行き来する手間をなくすための導線なので、目立たせる。 */
+.ghost.primary { color: #1d4ed8; border-color: #b6c9f5; background: #f2f6ff; font-weight: 600; }
+.ghost.primary:hover { background: #e6eeff; }
