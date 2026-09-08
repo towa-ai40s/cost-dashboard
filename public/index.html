@@ -42,7 +42,36 @@
     </div>
   </section>
 
-  <!-- ② 材料 -->
+  <!-- ② その日の売上（v0.2） -->
+  <section>
+    <div class="sec-head">
+      <h2>その日の売上を入れる</h2>
+      <label class="target">日付 <input type="date" id="sale-date"></label>
+    </div>
+    <p class="hint">
+      閉店後に、その日に売れた<strong>杯数（個数）だけ</strong>入れます。売上金額は「売価 × 杯数」で自動計算するので入力しません。<br>
+      1件＝「その日・そのメニュー・何杯」。日付を変えると、その日の入力に切り替わります。
+    </p>
+    <div class="table-wrap">
+      <table id="sales">
+        <thead>
+          <tr>
+            <th class="l">メニュー</th>
+            <th>売価</th>
+            <th>杯数</th>
+            <th>売上</th>
+            <th>原価</th>
+            <th>粗利</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+        <tfoot></tfoot>
+      </table>
+    </div>
+    <div id="sales-days"></div>
+  </section>
+
+  <!-- ③ 材料 -->
   <section>
     <div class="sec-head">
       <h2>材料の値段</h2>
@@ -66,13 +95,30 @@
     </div>
   </section>
 
-  <!-- ③ レシピ -->
+  <!-- ④ レシピ -->
   <section>
     <div class="sec-head">
       <h2>レシピ（1杯・1個に何を使うか）</h2>
       <button id="add-menu" class="ghost">＋ メニューを足す</button>
     </div>
     <div id="recipes"></div>
+  </section>
+
+  <!-- ⑤ バックアップ -->
+  <section>
+    <div class="sec-head">
+      <h2>バックアップ（書き出し・読み込み）</h2>
+    </div>
+    <p class="hint">
+      入力した数字は、いま開いているこのブラウザの中だけにあります。PCが壊れると一緒に消えます。<br>
+      <strong>書き出す</strong>を押すとファイル1個に保存され、別のPC・別のブラウザで<strong>読み込む</strong>と、そのまま続きが使えます。
+    </p>
+    <div class="backup">
+      <button id="export" class="ghost primary">💾 書き出す（ファイルに保存）</button>
+      <button id="import" class="ghost">📂 読み込む（ファイルから戻す）</button>
+      <input type="file" id="import-file" accept="application/json,.json" hidden>
+    </div>
+    <p class="hint" id="backup-msg"></p>
   </section>
 
   <footer>
